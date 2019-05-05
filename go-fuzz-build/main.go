@@ -225,7 +225,7 @@ func (c *Context) loadPkg(pkg string) {
 	// Resolve pkg.
 	// See https://golang.org/issue/30826 and https://golang.org/issue/30828.
 	rescfg := basePackagesConfig()
-	rescfg.Mode = packages.NeedName
+	rescfg.Mode = 1
 	rescfg.BuildFlags = []string{"-tags", makeTags()}
 	respkgs, err := packages.Load(rescfg, pkg)
 	if err != nil {
@@ -374,7 +374,7 @@ func isTest(name, prefix string) bool {
 func (c *Context) loadStd() {
 	// Find out what packages are in the standard library.
 	cfg := basePackagesConfig()
-	cfg.Mode = packages.NeedName
+	cfg.Mode = 1
 	stdpkgs, err := packages.Load(cfg, "std")
 	if err != nil {
 		c.failf("could not load standard library: %v", err)
